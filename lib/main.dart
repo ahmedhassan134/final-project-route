@@ -44,9 +44,10 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute:    isFirstTime
-      ? AppRoutes.homeScreen
-      : AppRoutes.loginScreen,
+      // initialRoute:    isFirstTime
+      // ? AppRoutes.homeScreen
+      // : AppRoutes.loginScreen,
+      initialRoute: AppRoutes.updateScreen,
       theme: AppTheme.lightTheme,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

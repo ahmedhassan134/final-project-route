@@ -6,7 +6,7 @@ class PageViewModel {
   final String image;
 
   final String? title;
-  final String? subTitle;
+  final String?subTitle;
   final bool? isNext;
   final bool? isPrevious;
 

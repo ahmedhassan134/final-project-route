@@ -142,7 +142,14 @@ class _UpdateScreenState extends State<UpdateScreen> {
 
   void showBottomSheetAvatar() {
     showModalBottomSheet(
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all( Radius.circular(SizeConfig.screenHeight*.04)),
+      ),
+      // isScrollControlled: true,
+      backgroundColor: AppColors.greyColor,
       context: context,
+
       builder: (context) => CustomShowItemAvatar(
         avatarList: avListImage,
         cIndex: cIndex,

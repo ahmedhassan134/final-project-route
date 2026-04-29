@@ -8,7 +8,6 @@ import '../../../../core/utils/models/page_view_model.dart';
 import '../../../../core/utils/size_config.dart';
 import '../../../../core/utils/widgets/elevated_button_widget.dart';
 
-
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
@@ -78,7 +77,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         ),
 
                         child: Column(
-                          spacing: SizeConfig.screenHeight * .02,
+                          // spacing: SizeConfig.screenHeight * .02,
                           mainAxisSize: .min,
 
                           children: [
@@ -87,32 +86,43 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               style: AppTextStyle.bold24White,
                             ),
 
-                            Text(
-                              PageViewModel.pageList[index].subTitle ?? " ",
-                              style: AppTextStyle.regular20Weight,
-                            ),
+
+
+                            if ((PageViewModel.pageList[index].subTitle ?? '')
+                                .isNotEmpty) ...[
+                              SizedBox(height: SizeConfig.screenHeight * .02),
+                              Text(
+                                PageViewModel.pageList[index].subTitle!,
+                                style: AppTextStyle.regular20Weight,
+                              ),
+                            ],
+
+                            SizedBox(height: SizeConfig.screenHeight * .02),
 
                             if (PageViewModel.pageList[index].isNext == true)
                               ElevatedButtonWidget(
-                                  onpPressed: () async {
-                                    if (index == PageViewModel.pageList.length - 1) {
+                                onpPressed: () async {
+                                  if (index ==
+                                      PageViewModel.pageList.length - 1) {
+                                    final prefs =
+                                        await SharedPreferences.getInstance();
+                                    await prefs.setBool("isFirstTime", false);
 
-                                      final prefs = await SharedPreferences.getInstance();
-                                      await prefs.setBool("isFirstTime", false);
-
-                                      Navigator.of(context).pushReplacementNamed(AppRoutes.loginScreen);
-
-                                    } else {
-                                      pageController.nextPage(
-                                        duration: Duration(milliseconds: 300),
-                                        curve: Curves.easeIn,
-                                      );
-                                    }
-                                  },
-                                text:index<PageViewModel.pageList.length-1?"Next":"Finish" ,
-
-
+                                    Navigator.of(context).pushReplacementNamed(
+                                      AppRoutes.loginScreen,
+                                    );
+                                  } else {
+                                    pageController.nextPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.easeIn,
+                                    );
+                                  }
+                                },
+                                text: index < PageViewModel.pageList.length - 1
+                                    ? "Next"
+                                    : "Finish",
                               ),
+                            SizedBox(height: SizeConfig.screenHeight * .02),
                             if (PageViewModel.pageList[index].isPrevious ==
                                 true)
                               ElevatedButtonWidget(
@@ -139,7 +149,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               itemCount: PageViewModel.pageList.length,
             ),
           ),
-
         ],
       ),
     );

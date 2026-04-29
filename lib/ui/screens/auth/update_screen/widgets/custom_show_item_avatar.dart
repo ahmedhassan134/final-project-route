@@ -10,6 +10,7 @@ class CustomShowItemAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: SizeConfig.screenWidth*.02,
